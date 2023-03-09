@@ -6,7 +6,7 @@
     <div class="container -md pt-5" >
         <form action="" method="POST"  >
             {%csrf_token%}
-                {{ form }}
+                {{ form.as_p }}
             <button type="submit">Dodaj</button>
         </form>
     </div>

@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from cv.views import Login, Logout, LandingPage, AddApplication, AddCompany
+from cv.views import Login, Logout, LandingPage, AddApplication, AddCompany, UpdateApplication
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,4 +24,5 @@ urlpatterns = [
     path('landing', LandingPage.as_view(), name='landing_page'),
     path('add/', AddCompany.as_view(), name='add'),
     path('add_cv/', AddApplication.as_view(), name='new_application'),
+    path('update_cv/<int:pk>/', UpdateApplication.as_view(), name='update_application'),
 ]

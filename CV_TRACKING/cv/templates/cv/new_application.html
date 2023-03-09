@@ -4,11 +4,11 @@
 {% block content %}
 
     <div class="container-md pt-5">
-        <form action="" method="POST" >
+        <form action="" method="POST"  class="mb-3">
                 {%csrf_token%}
-                <div class="mb-3">
-                    {{ form }}
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <div >
+                    {{ form.as_p }}
+                    <div class="d-grid gap-2 d-md-flex justify">
                         <button class="btn btn-success btn-sm" type="submit">Dodaj CV</button>
                     </div>
                 </div>

@@ -2,7 +2,9 @@ from django import forms
 from django.contrib.auth import authenticate
 from django.core.exceptions import ValidationError
 
-from .models import Company
+from django.utils.translation import gettext_lazy as _
+
+from .models import Company, Application
 
 
 class LoginForm(forms.Form):
@@ -19,8 +21,6 @@ class LoginForm(forms.Form):
 
 
 class CompanyForm(forms.ModelForm):
-    name = forms.CharField()
-    work_position= forms.CharField()
 
     class Meta:
         model = Company
@@ -28,7 +28,22 @@ class CompanyForm(forms.ModelForm):
 
 
 class ApplicationForm(forms.ModelForm):
+    company = forms.ModelChoiceField(queryset=Company.objects.all())
+    position = forms.ModelChoiceField(queryset=Company.objects.all())
 
     class Meta:
-        fields = ['company', 'post_date', 'position', 'salary', 'reply', 'reply_date', 'other']
+        model = Application
+        fields = ('company', 'position', 'post_date', 'salary', 'reply', 'reply_date', 'other')
+        widgets = {
+            'post_date': forms.widgets.DateInput(attrs={'type': 'date'}),
+            'reply_date': forms.widgets.DateInput(attrs={'type': 'date'})
+        }
+
+
+class UpdateApplicationForm(forms.ModelForm):
+    class Meta:
+        model = Application
+        fields = ('company', 'post_date', 'position', 'salary', 'reply', 'reply_date', 'other')
+
+
 

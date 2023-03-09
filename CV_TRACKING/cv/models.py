@@ -12,8 +12,11 @@ APPLICATION_ANSWER = (
 
 
 class Company(models.Model):
-    name = models.CharField(max_length=164, blank=False)
+    name = models.CharField(max_length=164, blank=False, unique=True)
     work_position = models.CharField(max_length=72, blank=False, default='python developer')
+
+    def __str__(self):
+        return self.name
 
 
 class Application(models.Model):
@@ -22,7 +25,7 @@ class Application(models.Model):
     post_date = models.DateField(blank=False)
     position = models.ForeignKey(Company, on_delete=models.CASCADE, blank=False, related_name='WorkPosition')
     salary = models.SmallIntegerField(blank=False, default=3000)
-    reply = models.CharField(max_length=32, choices=APPLICATION_ANSWER, default='Rejected', blank=False)
+    reply = models.CharField(max_length=32, choices=APPLICATION_ANSWER, default='Rejected')
     reply_date = models.DateField()
     other = models.TextField(max_length=256)
 
