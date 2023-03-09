@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+    <div class="container -md pt-5" >
+        <form action="" method="POST"  >
+            {%csrf_token%}
+                {{ form }}
+            <button type="submit">Dodaj</button>
+        </form>
+    </div>
+
+{% endblock %}
